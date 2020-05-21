@@ -1,0 +1,5 @@
+init_config:
+
+instances:
+    # - backup_path: "C:/Program Files/Microsoft SQL Server/MSSQL14.SQLEXPRESS/MSSQL/Backup/VenafiTPP.bak"
+    #   min_collection_interval: 60

@@ -1,0 +1,315 @@
+{
+    "title": "Venafi Service",
+    "description": "Provides a quick snapshot of the health of Venafi services",
+    "widgets": [
+        {
+            "definition": {
+                "type": "check_status",
+                "title": "Venafi TPP",
+                "title_size": "16",
+                "title_align": "center",
+                "check": "windows_service.state",
+                "grouping": "check",
+                "group": "service:ved,windows_service:ved,host:tpp",
+                "group_by": [],
+                "tags": [
+                    "*"
+                ]
+            },
+            "layout": {
+                "x": 11,
+                "y": 10,
+                "width": 22,
+                "height": 11
+            }
+        },
+        {
+            "definition": {
+                "type": "check_status",
+                "title": "Microsoft SQL",
+                "title_size": "16",
+                "title_align": "center",
+                "check": "windows_service.state",
+                "grouping": "check",
+                "group": "service:mssql_sqlexpress,windows_service:mssql_sqlexpress,host:tpp",
+                "group_by": [],
+                "tags": [
+                    "*"
+                ]
+            },
+            "layout": {
+                "x": 11,
+                "y": 25,
+                "width": 22,
+                "height": 12
+            }
+        },
+        {
+            "definition": {
+                "type": "check_status",
+                "title": "Database Backups",
+                "title_size": "16",
+                "title_align": "center",
+                "check": "venafi.db_backup.mtime",
+                "grouping": "cluster",
+                "group_by": [
+                    "mtime"
+                ],
+                "tags": [
+                    "*"
+                ]
+            },
+            "layout": {
+                "x": 11,
+                "y": 41,
+                "width": 15,
+                "height": 8
+            }
+        },
+        {
+            "definition": {
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "avg:venafi.valid_certs.count{*} by {service}.as_count()",
+                        "aggregator": "avg"
+                    }
+                ],
+                "title": "Valid Certificates",
+                "title_size": "16",
+                "title_align": "left",
+                "precision": 0
+            },
+            "layout": {
+                "x": 75,
+                "y": 10,
+                "width": 27,
+                "height": 14
+            }
+        },
+        {
+            "definition": {
+                "type": "note",
+                "content": "# Service Status",
+                "background_color": "white",
+                "font_size": "14",
+                "text_align": "center",
+                "show_tick": false,
+                "tick_pos": "50%",
+                "tick_edge": "bottom"
+            },
+            "layout": {
+                "x": 11,
+                "y": 0,
+                "width": 22,
+                "height": 7
+            }
+        },
+        {
+            "definition": {
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "avg:venafi.expired_certs.count{*}.as_count()",
+                        "aggregator": "avg"
+                    }
+                ],
+                "title": "Expired Certificates",
+                "title_size": "16",
+                "title_align": "left",
+                "autoscale": true,
+                "precision": 0
+            },
+            "layout": {
+                "x": 105,
+                "y": 10,
+                "width": 27,
+                "height": 14
+            }
+        },
+        {
+            "definition": {
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "avg:venafi.inerror_certs.count{*}.as_count()",
+                        "aggregator": "avg"
+                    }
+                ],
+                "title": "Certificates in Error",
+                "title_size": "16",
+                "title_align": "left",
+                "autoscale": true,
+                "precision": 0
+            },
+            "layout": {
+                "x": 75,
+                "y": 28,
+                "width": 27,
+                "height": 14
+            }
+        },
+        {
+            "definition": {
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "avg:venafi.invalid_certs.count{*}.as_count()",
+                        "aggregator": "avg"
+                    }
+                ],
+                "title": "Certificates Failed Validation",
+                "title_size": "16",
+                "title_align": "left",
+                "autoscale": true,
+                "precision": 0
+            },
+            "layout": {
+                "x": 105,
+                "y": 28,
+                "width": 27,
+                "height": 14
+            }
+        },
+        {
+            "definition": {
+                "type": "toplist",
+                "requests": [
+                    {
+                        "q": "top(avg:venafi.key_size.count{*} by {key_size}.as_count(), 10, 'mean', 'desc')"
+                    }
+                ],
+                "title": "Certificate Key Sizes",
+                "title_size": "16",
+                "title_align": "left"
+            },
+            "layout": {
+                "x": 138,
+                "y": 10,
+                "width": 28,
+                "height": 15
+            }
+        },
+        {
+            "definition": {
+                "type": "toplist",
+                "requests": [
+                    {
+                        "q": "top(avg:venafi.key_algorithm.count{*} by {key_algorithm}.as_count(), 10, 'mean', 'desc')"
+                    }
+                ],
+                "title": "Certificate Key Algorithms",
+                "title_size": "16",
+                "title_align": "left"
+            },
+            "layout": {
+                "x": 138,
+                "y": 27,
+                "width": 28,
+                "height": 14
+            }
+        },
+        {
+            "definition": {
+                "type": "note",
+                "content": "# Certificate Statuses",
+                "background_color": "white",
+                "font_size": "14",
+                "text_align": "center",
+                "show_tick": false,
+                "tick_pos": "50%",
+                "tick_edge": "bottom"
+            },
+            "layout": {
+                "x": 75,
+                "y": 0,
+                "width": 57,
+                "height": 7
+            }
+        },
+        {
+            "definition": {
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "avg:venafi.cert_issue_time.avg{*}.as_count()",
+                        "aggregator": "avg"
+                    }
+                ],
+                "title": "Certificate Issuance Time (sec)",
+                "title_size": "16",
+                "title_align": "left",
+                "autoscale": true,
+                "precision": 3
+            },
+            "layout": {
+                "x": 40,
+                "y": 10,
+                "width": 28,
+                "height": 15
+            }
+        },
+        {
+            "definition": {
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "avg:venafi.ca_issue_time.avg{*}.as_count()",
+                        "aggregator": "avg"
+                    }
+                ],
+                "title": "CA Issuance Time (sec)",
+                "title_size": "16",
+                "title_align": "left",
+                "autoscale": true,
+                "precision": 3
+            },
+            "layout": {
+                "x": 40,
+                "y": 28,
+                "width": 28,
+                "height": 15
+            }
+        },
+        {
+            "definition": {
+                "type": "note",
+                "content": "# Certificate Key Types",
+                "background_color": "white",
+                "font_size": "14",
+                "text_align": "center",
+                "show_tick": false,
+                "tick_pos": "50%",
+                "tick_edge": "bottom"
+            },
+            "layout": {
+                "x": 138,
+                "y": 0,
+                "width": 28,
+                "height": 7
+            }
+        },
+        {
+            "definition": {
+                "type": "note",
+                "content": "# Issuance Time",
+                "background_color": "white",
+                "font_size": "14",
+                "text_align": "center",
+                "show_tick": false,
+                "tick_pos": "50%",
+                "tick_edge": "left"
+            },
+            "layout": {
+                "x": 40,
+                "y": 0,
+                "width": 28,
+                "height": 7
+            }
+        }
+    ],
+    "template_variables": [],
+    "layout_type": "free",
+    "is_read_only": false,
+    "notify_list": []
+}

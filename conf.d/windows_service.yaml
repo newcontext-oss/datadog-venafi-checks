@@ -1,0 +1,7 @@
+init_config:
+
+instances:
+  - services:
+      - "^VED$"
+      - Venafi
+      - MSSQL

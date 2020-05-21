@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  datadog:
+    image: datadog/agent:7
+    environment:
+      DD_API_KEY: ${DD_API_KEY}
+    volumes:
+      - ./checks.d:/checks.d
+      - ./conf.d:/conf.d

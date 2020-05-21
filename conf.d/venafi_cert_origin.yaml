@@ -1,0 +1,12 @@
+init_config:
+
+instances:
+  # - url: "https://venafi-host.com
+  #   auth_method: "oauth"
+  #   username: "username"
+  #   password: "password"
+  #   client_id: "clientid"
+  #   scope: "scope:scope"
+  #   min_collection_interval: 60
+  #   req_limit: 10
+  #   req_delay: 3

@@ -1,0 +1,17 @@
+init_config:
+
+instances:
+  # - url: "https://venafi-host.com"
+  #   auth_method: "oauth"
+  #   username: "username"
+  #   password: "password"
+  #   client_id: "clientid"
+  #   scope: "scope:scope"
+  #   req_limit: 10000
+  #   key_sizes:
+  #     - 512
+  #     - 1024
+  #     - 2048
+  #   key_algorithms:
+  #     - "RSA"
+  #   min_collection_interval: 60

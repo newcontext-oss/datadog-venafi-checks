@@ -1,0 +1,86 @@
+{
+    "title": "Venafi Requesters",
+    "description": "Provides information about certificate requests",
+    "widgets": [
+        {
+            "definition": {
+                "type": "toplist",
+                "requests": [
+                    {
+                        "q": "top(avg:venafi.cert_requester.count{*} by {requester}.as_count(), 10, 'mean', 'desc')"
+                    }
+                ],
+                "title": "Certificate Requesters",
+                "title_size": "16",
+                "title_align": "left"
+            },
+            "layout": {
+                "x": 55,
+                "y": 37,
+                "width": 51,
+                "height": 20
+            }
+        },
+        {
+            "definition": {
+                "type": "toplist",
+                "requests": [
+                    {
+                        "q": "top(avg:venafi.common_name.count{*} by {cn}.as_count(), 10, 'mean', 'desc')"
+                    }
+                ],
+                "title": "Common Names (CN) Requested",
+                "title_size": "16",
+                "title_align": "left"
+            },
+            "layout": {
+                "x": 1,
+                "y": 4,
+                "width": 51,
+                "height": 28
+            }
+        },
+        {
+            "definition": {
+                "type": "toplist",
+                "requests": [
+                    {
+                        "q": "top(avg:venafi.requested_sans.count{*} by {sans}.as_count(), 10, 'mean', 'desc')"
+                    }
+                ],
+                "title": "Subjective Alternative Names (SANS) Requested",
+                "title_size": "16",
+                "title_align": "left"
+            },
+            "layout": {
+                "x": 54,
+                "y": 4,
+                "width": 51,
+                "height": 28
+            }
+        },
+        {
+            "definition": {
+                "type": "toplist",
+                "requests": [
+                    {
+                        "q": "top(avg:venafi.cert_origins.count{*} by {origin}.as_count(), 10, 'mean', 'desc')"
+                    }
+                ],
+                "title": "Certificate Origins",
+                "title_size": "16",
+                "title_align": "left"
+            },
+            "layout": {
+                "x": 1,
+                "y": 37,
+                "width": 51,
+                "height": 20
+            }
+        }
+    ],
+    "template_variables": [],
+    "layout_type": "free",
+    "is_read_only": false,
+    "notify_list": []
+}
