@@ -2,7 +2,7 @@
 
 [![New Context](https://img.shields.io/badge/awesome-for%20hire-orange?style=flat-square)](http://www.newcontext.com)
 
-This is a collection of [metrics](http://docs.datadoghq.com/developers/metrics/agent_metrics_submission) and [checks](http://docs.datadoghq.com/guides/agent_checks/) in for the [Datadog agent](https://github.com/DataDog/datadog-agent) when deployed on the Venafi Platform. Also includes dashboards that can be imported to a Datadog account.
+This is a collection of [metrics](http://docs.datadoghq.com/developers/metrics/agent_metrics_submission) and [checks](http://docs.datadoghq.com/guides/agent_checks/) for a [Datadog agent](https://github.com/DataDog/datadog-agent) deployed on the Venafi Trust Protection Platform server. These metrics provide insight into the health of the Venafi platform, and a live, at-a-glance view into the machine identities active throughout your organization. This repo also includes pre-built dashboards for these metrics that can be imported to an active Datadog account.
 
 ## Using The Checks
 
