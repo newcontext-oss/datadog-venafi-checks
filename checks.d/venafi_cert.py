@@ -23,6 +23,8 @@ class VenafiCheck(AgentCheck):
     CLIENT_ID = ""
     SCOPE = ""
 
+    VERIFY_SSL = True
+
     def check(self, instance):
         # configure
         self.configure(instance)
@@ -82,6 +84,9 @@ class VenafiCheck(AgentCheck):
         if "key_algorithms" in instance:
             self.KEY_ALGOS = instance["key_algorithms"]
 
+        if "verify_ssl" in instance:
+            self.VERIFY_SSL = instance["verify_ssl"]
+
     def authorize(self):
         url = self.BASE_URL + "/vedsdk/authorize/"
 
@@ -92,7 +97,12 @@ class VenafiCheck(AgentCheck):
 
         headers = {"Content-Type": "application/json"}
 
-        resp = requests.post(url, headers=headers, json=payload)
+        resp = requests.post(
+            url,
+            headers=headers,
+            json=payload,
+            verify=self.VERIFY_SSL,
+        )
 
         if resp.status_code != 200:
             raise Exception(
@@ -114,7 +124,12 @@ class VenafiCheck(AgentCheck):
 
         headers = {"Content-Type": "application/json"}
 
-        resp = requests.post(url, headers=headers, json=payload)
+        resp = requests.post(
+            url,
+            headers=headers,
+            json=payload,
+            verify=self.VERIFY_SSL,
+        )
 
         if resp.status_code != 200:
             raise Exception(
@@ -139,7 +154,13 @@ class VenafiCheck(AgentCheck):
 
         payload = {"CertificateType": "CodeSigning"}
 
-        resp = requests.get(url, params=params, headers=headers, json=payload)
+        resp = requests.get(
+            url,
+            params=params,
+            headers=headers,
+            json=payload,
+            verify=self.VERIFY_SSL,
+        )
 
         if resp.status_code != 200:
             raise Exception(
@@ -171,7 +192,13 @@ class VenafiCheck(AgentCheck):
 
         payload = {"CertificateType": "CodeSigning"}
 
-        resp = requests.get(url, params=params, headers=headers, json=payload)
+        resp = requests.get(
+            url,
+            params=params,
+            headers=headers,
+            json=payload,
+            verify=self.VERIFY_SSL,
+        )
 
         if resp.status_code != 200:
             raise Exception(
@@ -200,7 +227,12 @@ class VenafiCheck(AgentCheck):
             "X-Venafi-Api-Key": self.TOKEN,
         }
 
-        resp = requests.get(url, params=params, headers=headers)
+        resp = requests.get(
+            url,
+            params=params,
+            headers=headers,
+            verify=self.VERIFY_SSL,
+        )
 
         if resp.status_code != 200:
             raise Exception(
@@ -229,7 +261,12 @@ class VenafiCheck(AgentCheck):
             "X-Venafi-Api-Key": self.TOKEN,
         }
 
-        resp = requests.get(url, params=params, headers=headers)
+        resp = requests.get(
+            url,
+            params=params,
+            headers=headers,
+            verify=self.VERIFY_SSL,
+        )
 
         if resp.status_code != 200:
             raise Exception(
@@ -258,7 +295,12 @@ class VenafiCheck(AgentCheck):
             "X-Venafi-Api-Key": self.TOKEN,
         }
 
-        resp = requests.get(url, params=params, headers=headers)
+        resp = requests.get(
+            url,
+            params=params,
+            headers=headers,
+            verify=self.VERIFY_SSL,
+        )
 
         if resp.status_code != 200:
             raise Exception(
@@ -289,7 +331,12 @@ class VenafiCheck(AgentCheck):
                 "limit": self.LIMIT,
             }
 
-            resp = requests.get(url, params=params, headers=headers)
+            resp = requests.get(
+                url,
+                params=params,
+                headers=headers,
+                verify=self.VERIFY_SSL,
+            )
 
             if resp.status_code != 200:
                 raise Exception(
@@ -322,7 +369,12 @@ class VenafiCheck(AgentCheck):
                 "limit": self.LIMIT,
             }
 
-            resp = requests.get(url, params=params, headers=headers)
+            resp = requests.get(
+                url,
+                params=params,
+                headers=headers,
+                verify=self.VERIFY_SSL,
+            )
 
             if resp.status_code != 200:
                 raise Exception(
@@ -350,7 +402,12 @@ class VenafiCheck(AgentCheck):
             "limit": self.LIMIT,
         }
 
-        resp = requests.get(url, params=params, headers=headers)
+        resp = requests.get(
+            url,
+            params=params,
+            headers=headers,
+            verify=self.VERIFY_SSL,
+        )
 
         if resp.status_code != 200:
             raise Exception(
@@ -402,14 +459,20 @@ class VenafiCheck(AgentCheck):
             self.count(
                 "venafi.common_name.count",
                 cn_count,
-                tags=["cn:%s" % cn_name, "metric_submission_type:count",],
+                tags=[
+                    "cn:%s" % cn_name,
+                    "metric_submission_type:count",
+                ],
             )
 
         for sans_name, sans_count in sans_requested.items():
             self.count(
                 "venafi.requested_sans.count",
                 sans_count,
-                tags=["sans:%s" % sans_name, "metric_submission_type:count",],
+                tags=[
+                    "sans:%s" % sans_name,
+                    "metric_submission_type:count",
+                ],
             )
 
     def get_cert_issue_times(self, log_events):
@@ -541,7 +604,12 @@ class VenafiCheck(AgentCheck):
             "X-Venafi-Api-Key": self.TOKEN,
         }
 
-        resp = requests.get(url, params=params, headers=headers)
+        resp = requests.get(
+            url,
+            params=params,
+            headers=headers,
+            verify=self.VERIFY_SSL,
+        )
 
         if resp.status_code != 200:
             raise Exception(

@@ -15,3 +15,4 @@ instances:
   #   key_algorithms:
   #     - "RSA"
   #   min_collection_interval: 60
+  #   verify_ssl: True

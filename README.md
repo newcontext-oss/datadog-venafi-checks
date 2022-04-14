@@ -16,40 +16,42 @@ To install the project's dependencies, clone this repo to the host machine and r
 
 #### `venafi_cert.yaml`
 
-| Key | Description | Required |
-|---|---|---|
-| url | The url of the Venafi instance | Yes
-| auth_method | `oauth` or `api_key` (Default) | No
-| username | Venafi tpp username | Yes
-| password | Venafi tpp password | Yes
-| client_id | `OAuth` client id. Required if `auth_method` is `oauth`. | No
-| scope | `OAuth` scope. Required if `auth_method` is `oauth`. | No
-| req_limit | Default is `10000`. Limits number of records returned from the API. | No
-| key_sizes | Default is a list of `[512, 1024, 2048]` | No
-| key_algorithms | Default is a list of `["RSA", "ECC"]` | No
-| min_collection_interval | Default is `60`. Sets the minimum interval of metrics collections when the DataDog agent is running.| No
+| Key                     | Description                                                                                          | Required |
+| ----------------------- | ---------------------------------------------------------------------------------------------------- | -------- |
+| url                     | The url of the Venafi instance                                                                       | Yes      |
+| auth_method             | `oauth` or `api_key` (Default)                                                                       | No       |
+| username                | Venafi tpp username                                                                                  | Yes      |
+| password                | Venafi tpp password                                                                                  | Yes      |
+| client_id               | `OAuth` client id. Required if `auth_method` is `oauth`.                                             | No       |
+| scope                   | `OAuth` scope. Required if `auth_method` is `oauth`.                                                 | No       |
+| req_limit               | Default is `10000`. Limits number of records returned from the API.                                  | No       |
+| key_sizes               | Default is a list of `[512, 1024, 2048]`                                                             | No       |
+| key_algorithms          | Default is a list of `["RSA", "ECC"]`                                                                | No       |
+| min_collection_interval | Default is `60`. Sets the minimum interval of metrics collections when the DataDog agent is running. | No       |
+| verify_ssl              | Default is `True`. Verify SSL certificates. Set to `False` if using self-signed SSL certificates     | No       |
 
 #### `venafi_cert_origin.yaml`
 
-| Key | Description | Required |
-|---|---|---|
-| url | The url of the Venafi instance | Yes
-| auth_method | `oauth` or `api_key` (Default) | No
-| username | Venafi tpp username | Yes
-| password | Venafi tpp password | Yes
-| client_id | `OAuth` client id. Required if `auth_method` is `oauth`. | No
-| scope | `OAuth` scope. Required if `auth_method` is `oauth`. | No
-| req_limit | Default is `10`. Limits number of records returned from the API. | No
-| req_delay | Default is `3`. Sets a delay between the fetching of record sets. | No
-| key_algorithms | Default is a list of `["RSA", "ECC"]` | No
-| min_collection_interval | Default is `60`. Sets the minimum interval of metrics collections when the DataDog agent is running.| No
+| Key                     | Description                                                                                          | Required |
+| ----------------------- | ---------------------------------------------------------------------------------------------------- | -------- |
+| url                     | The url of the Venafi instance                                                                       | Yes      |
+| auth_method             | `oauth` or `api_key` (Default)                                                                       | No       |
+| username                | Venafi tpp username                                                                                  | Yes      |
+| password                | Venafi tpp password                                                                                  | Yes      |
+| client_id               | `OAuth` client id. Required if `auth_method` is `oauth`.                                             | No       |
+| scope                   | `OAuth` scope. Required if `auth_method` is `oauth`.                                                 | No       |
+| req_limit               | Default is `10`. Limits number of records returned from the API.                                     | No       |
+| req_delay               | Default is `3`. Sets a delay between the fetching of record sets.                                    | No       |
+| key_algorithms          | Default is a list of `["RSA", "ECC"]`                                                                | No       |
+| min_collection_interval | Default is `60`. Sets the minimum interval of metrics collections when the DataDog agent is running. | No       |
+| verify_ssl              | Default is `True`. Verify SSL certificates. Set to `False` if using self-signed SSL certificates     | No       |
 
 #### `venafi_db.yaml`
 
-| Key | Description | Required |
-|---|---|---|
-| backup_path | The path to the `VenafiTPP.bak` file | Yes
-| min_collection_interval | Default is `60`. Sets the minimum interval of metrics collections when the DataDog agent is running. | No
+| Key                     | Description                                                                                          | Required |
+| ----------------------- | ---------------------------------------------------------------------------------------------------- | -------- |
+| backup_path             | The path to the `VenafiTPP.bak` file                                                                 | Yes      |
+| min_collection_interval | Default is `60`. Sets the minimum interval of metrics collections when the DataDog agent is running. | No       |
 
 ## Using the Dashboards
 
@@ -192,6 +194,7 @@ Displays a snap-shot view of Venafi services to quickly see if a service is fail
 ### Venafi Requesters
 
 Displays the following metrics when a new certificate is requested:
+
 - domains in the cn and sans fields
 - origins requested
 - users requesting certificates

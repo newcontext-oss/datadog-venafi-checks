@@ -20,6 +20,8 @@ class VenafiCheck(AgentCheck):
     CLIENT_ID = ""
     SCOPE = ""
 
+    VERIFY_SSL = True
+
     def check(self, instance):
         # configure
         self.configure(instance)
@@ -63,6 +65,9 @@ class VenafiCheck(AgentCheck):
         if "req_delay" in instance:
             self.DELAY = instance["req_delay"]
 
+        if "verify_ssl" in instance:
+            self.VERIFY_SSL = instance["verify_ssl"]
+
     def authorize(self):
         url = self.BASE_URL + "/vedsdk/authorize/"
 
@@ -73,7 +78,12 @@ class VenafiCheck(AgentCheck):
 
         headers = {"Content-Type": "application/json"}
 
-        resp = requests.post(url, headers=headers, json=payload)
+        resp = requests.post(
+            url,
+            headers=headers,
+            json=payload,
+            verify=self.VERIFY_SSL,
+        )
 
         if resp.status_code != 200:
             raise Exception(
@@ -95,7 +105,12 @@ class VenafiCheck(AgentCheck):
 
         headers = {"Content-Type": "application/json"}
 
-        resp = requests.post(url, headers=headers, json=payload)
+        resp = requests.post(
+            url,
+            headers=headers,
+            json=payload,
+            verify=self.VERIFY_SSL,
+        )
 
         if resp.status_code != 200:
             raise Exception(
@@ -120,7 +135,12 @@ class VenafiCheck(AgentCheck):
             "limit": self.LIMIT,
         }
 
-        resp = requests.get(url, params=params, headers=headers)
+        resp = requests.get(
+            url,
+            params=params,
+            headers=headers,
+            verify=self.VERIFY_SSL,
+        )
 
         if resp.status_code != 200:
             raise Exception(
@@ -141,7 +161,11 @@ class VenafiCheck(AgentCheck):
                     "X-Venafi-Api-Key": self.TOKEN,
                 }
 
-                c_resp = requests.get(url, headers=headers)
+                c_resp = requests.get(
+                    url,
+                    headers=headers,
+                    verify=self.VERIFY_SSL,
+                )
 
                 if c_resp.status_code != 200:
                     raise Exception(
