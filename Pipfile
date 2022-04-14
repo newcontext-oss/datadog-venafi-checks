@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+datadog-checks-base = "==11.0.0"
+prometheus-client = "==0.7.1"
+requests = "==2.23.0"
+six = "==1.14.0"
+PyYAML = "==5.3.1"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
