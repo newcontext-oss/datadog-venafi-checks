@@ -367,12 +367,13 @@ class VenafiCheck(AgentCheck):
             if "X509" not in certificate:
                 continue
 
-            cn = certificate["X509"]["CN"]
+            if "CN" in certificate["X509"]:
+                cn = certificate["X509"]["CN"]
 
-            if cn in common_name_results:
-                common_name_results[cn] += 1
-            else:
-                common_name_results[cn] = 1
+                if cn in common_name_results:
+                    common_name_results[cn] += 1
+                else:
+                    common_name_results[cn] = 1
 
             if "SANS" in certificate["X509"]:
                 sans_group = certificate["X509"]["SANS"]
