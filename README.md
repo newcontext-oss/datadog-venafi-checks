@@ -25,6 +25,7 @@ To install the project's dependencies, clone this repo to the host machine and r
 | client_id | `OAuth` client id. Required if `auth_method` is `oauth`. | No
 | scope | `OAuth` scope. Required if `auth_method` is `oauth`. | No
 | req_limit | Default is `10000`. Limits number of records returned from the API. | No
+| log_req_limit | Default is `10000`. Limits number of log records returned from the API. | No
 | key_sizes | Default is a list of `[512, 1024, 2048]` | No
 | key_algorithms | Default is a list of `["RSA", "ECC"]` | No
 | min_collection_interval | Default is `60`. Sets the minimum interval of metrics collections when the DataDog agent is running.| No

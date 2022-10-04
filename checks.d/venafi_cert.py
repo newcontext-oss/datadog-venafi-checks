@@ -11,6 +11,7 @@ from datadog_checks.checks import AgentCheck
 class VenafiCheck(AgentCheck):
     UTCNOW = datetime.utcnow()
     LIMIT = 5000
+    LOG_LIMIT = 10000
 
     KEY_SIZES = [256, 512, 1024, 2048]
     KEY_ALGOS = ["RSA", "ECC"]
@@ -75,6 +76,9 @@ class VenafiCheck(AgentCheck):
 
         if "req_limit" in instance:
             self.LIMIT = instance["req_limit"]
+
+        if "log_req_limit" in instance:
+            self.LOG_LIMIT = instance["log_req_limit"]
 
         if "key_sizes" in instance:
             self.KEY_SIZES = instance["key_sizes"]
@@ -305,7 +309,7 @@ class VenafiCheck(AgentCheck):
                 tags=[
                     "key_algorithm:%s" % algo.lower(),
                     "metric_submission_type:count",
-                ],
+                    ],
             )
 
     def count_keysize_certs(self):
@@ -532,7 +536,7 @@ class VenafiCheck(AgentCheck):
         url = self.BASE_URL + "/vedsdk/Log/"
 
         params = {
-            "limit": self.LIMIT,
+            "limit": self.LOG_LIMIT,
         }
 
         headers = {
