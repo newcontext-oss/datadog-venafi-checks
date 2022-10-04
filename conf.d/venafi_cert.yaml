@@ -8,6 +8,7 @@ instances:
   #   client_id: "clientid"
   #   scope: "scope:scope"
   #   req_limit: 10000
+  #   log_req_limit: 10000
   #   key_sizes:
   #     - 512
   #     - 1024
