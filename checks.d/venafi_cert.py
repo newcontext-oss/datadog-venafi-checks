@@ -309,7 +309,7 @@ class VenafiCheck(AgentCheck):
                 tags=[
                     "key_algorithm:%s" % algo.lower(),
                     "metric_submission_type:count",
-                    ],
+                ],
             )
 
     def count_keysize_certs(self):
